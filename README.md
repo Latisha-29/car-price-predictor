@@ -17,20 +17,20 @@ This is a full-stack machine learning web application that predicts the price of
 Folder Structure
 
 car-price-predictor/
-├── backend/
-│ ├── server.js # Express backend
+├── backend/ # Backend server and ML integration
+│ ├── server.js # Express backend server
 │ ├── model.pkl # Trained Random Forest model
 │ ├── predict.py # Python script to load model and predict
 │ └── requirements.txt # Python dependencies
 │
-├── frontend/
-│ ├── index.html # Main UI
-│ ├── style.css # Tailwind CSS styles (or inline)
+├── frontend/ # Frontend user interface
+│ ├── index.html # Main HTML UI
+│ └── style.css # Tailwind CSS styles (or inline)
 │
 ├── dataset/
-│ └── best_car_price_data.csv
+│ └── best_car_price_data.csv # Training dataset
 │
-└── README.md
+└── README.md # Project documentation
 
 ----
 
