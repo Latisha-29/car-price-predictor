@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Price Predictor </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#1e40af',
+                        accent: '#06b6d4',
+                        dark: '#1f2937',
+                        'dark-lighter': '#374151'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-bl from-pink-400 via-pink-600 to-purple-800 min-h-screen">
+
+    <!-- Navigation -->
+    <nav class="bg-gray-900/80 backdrop-blur-md border-b border-gray-700/50 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <i class="fas fa-car text-blue-400 text-2xl mr-3"></i>
+                        <span class="text-white text-xl font-bold">CarPrice Pro🏎️📈</span>
+                    </div>
+                    <div class="hidden md:block ml-10">
+                        <div class="flex items-baseline space-x-4">
+                            <a href="#dashboard" class="text-blue-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Dashboard</a>
+                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+       <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold text-white mb-2">Car Price Prediction Dashboard</h1>
+            <p class="text-gray-300 text-lg">Predict car prices using advanced machine learning algorithms</p>
+        </div>
+                
+       <!-- Stats Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8" id="statsCards">
+    <!-- Only "Total Cars" card is kept -->
+    <div class="bg-gray-800/50 backdrop-blur-sm p-4 rounded-xl border border-gray-700/50 flex items-center space-x-4">
+        <div class="bg-blue-700/50 p-3 rounded-full">
+            <i class="fas fa-database text-blue-300 text-xl"></i>
+        </div>
+        <div>
+            <div class="text-gray-300 text-sm">Total Cars</div>
+            <div class="text-white text-2xl font-bold" id="totalCars">205</div>
+        </div>
+    </div>
+</div>
+            <!-- Prediction Form -->
+            <div class="lg:col-span-1">
+                <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50">
+                    <div class="flex items-center mb-6">
+                        <i class="fas fa-calculator text-blue-400 text-xl mr-3"></i>
+                        <h2 class="text-xl font-semibold text-white">Price Prediction</h2>
+                    </div>
+
+                    <form id="predictionForm" class="space-y-4">
+                        <div>
+                            <label class="block text-gray-300 text-sm font-medium mb-2">Fuel Type</label>
+                            <select id="fueltype" class="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">Select fuel type</option>
+                                <option value="gas">Gas</option>
+                                <option value="diesel">Diesel</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-300 text-sm font-medium mb-2">Car Body</label>
+                            <select id="carbody" class="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">Select body type</option>
+                                <option value="sedan">Sedan</option>
+                                <option value="hatchback">Hatchback</option>
+                                <option value="wagon">Wagon</option>
+                                <option value="convertible">Convertible</option>
+                                <option value="hardtop">Hardtop</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-300 text-sm font-medium mb-2">Engine Size</label>
+                            <input type="number" id="enginesize" placeholder="e.g., 130" 
+                                   class="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-300 text-sm font-medium mb-2">Horsepower</label>
+                            <input type="number" id="horsepower" placeholder="e.g., 111" 
+                                   class="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-300 text-sm font-medium mb-2">Curb Weight (lbs)</label>
+                            <input type="number" id="curbweight" placeholder="e.g., 2548" 
+                                   class="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-300 text-sm font-medium mb-2">Number of Cylinders</label>
+                            <select id="cylindernumber" class="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">Select cylinders</option>
+                                <option value="two">Two</option>
+                                <option value="three">Three</option>
+                                <option value="four">Four</option>
+                                <option value="five">Five</option>
+                                <option value="six">Six</option>
+                                <option value="eight">Eight</option>
+                                <option value="twelve">Twelve</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-300 text-sm font-medium mb-2">Highway MPG</label>
+                            <input type="number" id="highwaympg" placeholder="e.g., 27" 
+                                   class="w-full bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <button type="submit" id="predictBtn" 
+                                class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-105">
+                            <i class="fas fa-magic mr-2"></i>
+                            Predict Price
+                        </button>
+                    </form>
+
+                   <!-- Prediction Result -->
+                    <div id="predictionResult" class="mt-6 p-4 bg-gradient-to-r from-green-500/20 to-blue-500/20 rounded-lg border border-green-500/30 hidden">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">Predicted Price:</span>
+                            <span id="predictedPrice" class="text-2xl font-bold text-green-400"></span>
+                        </div>
+                        <div class="mt-2 text-sm text-gray-400">
+                            Confidence: <span id="confidence" class="text-blue-400"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Analytics Charts -->
+            <div class="lg:col-span-2">
+                <div class="space-y-6">
+                    <!-- Price Distribution Chart -->
+                    <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-white">Price Distribution</h3>
+                        </div>
+                        <div class="h-64">
+                            <canvas id="priceChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Feature Correlation Chart -->
+                    <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-white">Feature Correlations</h3>
+                        </div>
+                        <div class="h-64">
+                            <canvas id="correlationChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Table -->
+        <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-semibold text-white">Dataset Overview</h2>
+                <div class="flex items-center space-x-4">
+                    <input type="text" id="searchInput" placeholder="Search cars..." 
+                           class="bg-gray-700/50 border border-gray-600 rounded-lg px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+            </div>
+
+            <!-- Data Table -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-left" id="dataTable">
+                    <thead>
+                        <tr class="border-b border-gray-700">
+                            <th class="pb-3 text-gray-300 font-medium">Car Name</th>
+                            <th class="pb-3 text-gray-300 font-medium">Fuel Type</th>
+                            <th class="pb-3 text-gray-300 font-medium">Body</th>
+                            <th class="pb-3 text-gray-300 font-medium">Engine Size</th>
+                            <th class="pb-3 text-gray-300 font-medium">Horsepower</th>
+                            <th class="pb-3 text-gray-300 font-medium">Weight</th>
+                            <th class="pb-3 text-gray-300 font-medium">MPG</th>
+                            <th class="pb-3 text-gray-300 font-medium">Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex items-center justify-between mt-6">
+                <div class="text-gray-400 text-sm" id="paginationInfo"></div>
+                <div class="flex items-center space-x-2" id="paginationControls">
+                    <!-- Pagination controls will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-gray-800 rounded-lg p-6 flex items-center space-x-4">
+            <i class="fas fa-spinner animate-spin text-blue-400 text-2xl"></i>
+            <span class="text-white">Processing prediction...</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
