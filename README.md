@@ -26,7 +26,7 @@ car-price-predictor/
 ├── frontend/
 │ ├── index.html # Main UI
 │ ├── style.css # Tailwind CSS styles (or inline)
-│
+│ ├── script.js #Javascript
 ├── dataset/
 │ └── best_car_price_data.csv
 │
