@@ -17,21 +17,25 @@ This is a full-stack machine learning web application that predicts the price of
 Folder Structure
 
 
+## 📁 Folder Structure
+
 car-price-predictor/
-  backend/
-    server.js              # Express backend server
-    model.pkl              # Trained Random Forest model (saved with pickle)
-    predict.py             # Python script to load model and predict
-    requirements.txt       # Python dependencies
+backend/
+backend/server.js
+backend/model.pkl
+backend/predict.py
+backend/requirements.txt
 
-  frontend/
-    index.html             # Main HTML UI form
-    style.css              # Tailwind CSS styles
+frontend/
+frontend/index.html
+frontend/style.css
+frontend/script.js
 
-  dataset/
-    best_car_price_data.csv  # Dataset used for training
+dataset/
+dataset/best_car_price_data.csv
 
-  README.md                # Project documentation
+README.md
+
 
 ----
 
