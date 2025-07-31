@@ -13,31 +13,29 @@ This is a full-stack machine learning web application that predicts the price of
 5. The predicted price is displayed to the user
 
 ----
-
-Folder Structure
-
-
-## 📁 Folder Structure
+```
+## Folder Structure
 
 car-price-predictor/
-backend/
-backend/server.js
-backend/model.pkl
-backend/predict.py
-backend/requirements.txt
+├── backend/
+│ ├── server.js # Express backend
+│ ├── model.pkl # Trained Random Forest model
+│ ├── predict.py # Python script to load model and predict
+│ └── requirements.txt # Python dependencies
+│
+├── frontend/
+│ ├── index.html # Main UI
+│ ├── style.css # Tailwind CSS styles (or inline)
+│
+├── dataset/
+│ └── best_car_price_data.csv
+│
+└── README.md
 
-frontend/
-frontend/index.html
-frontend/style.css
-frontend/script.js
 
-dataset/
-dataset/best_car_price_data.csv
-
-README.md
-
-
+'''
 ----
+```
 
 📊 Features Used for Prediction
 
