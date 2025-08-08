@@ -4,10 +4,6 @@ This is a full-stack machine learning web application that predicts the price of
 
 ---
 
-🔗 **Live App**: [car-price-predictor-vdfb.vercel.app](https://car-price-predictor-vdfb.vercel.app/)
-
----
-
 🧠 How It Works
 
 1. The user enters car specifications on the web page (like horsepower, engine size, fuel type, etc.)
